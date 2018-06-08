@@ -29,7 +29,7 @@ import Control.Monad.Trans.Cont
 import Data.Coerce
 import Data.Function (on)
 import Data.Functor.Alt
-import Data.Functor.Bind
+import Data.Functor.Semimonad
 import Data.Int
 import Data.Monoid (Any(..), All(..), Product(..), Sum(..), First(..), Last(..))
 import Data.Ord
@@ -64,7 +64,7 @@ instance Functor (Search a) where
   fmap f (Search k) = Search $ \ba -> f (k (ba.f))
   {-# INLINE fmap #-}
 
-instance Apply (Search a) where
+instance Semiapplicative (Search a) where
   (<.>) = (<*>)
   {-# INLINE (<.>) #-}
 
@@ -83,7 +83,7 @@ instance Ord a => Alt (Search a) where
         a = optimum l p
         b = optimum r p
 
-instance Bind (Search a) where
+instance Semimonad (Search a) where
   Search ma >>- f = Search $ \p ->
     optimum (f (ma (\a -> p (optimum (f a) p)))) p
 

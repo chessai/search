@@ -35,7 +35,7 @@ library
     base                 >= 4.8   && < 5,
     ghc-prim,
     profunctors          >= 4     && < 6,
-    semigroupoids        >= 4     && < 6,
+    semigroupoids        >= 6     && < 7,
     tagged               >= 0.7   && < 1,
     transformers         >= 0.3   && < 0.6
 
